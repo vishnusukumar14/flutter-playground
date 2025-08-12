@@ -63,7 +63,7 @@ class _HomePageState extends ConsumerState<HomePage> {
             child: Column(
               // mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              // crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(count.toString(), style: TextStyle(fontSize: 56)),
               ],
