@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 
+import 'bloc/bloc_todo.dart';
+//
+// void main() {
+//   runApp(ProviderScope(child: const MyApp()));
+// }
+
 void main() {
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(BlocProvider(create: (_) => TodoBloc(), child: const MyApp()));
 }
 
 final class CountNotifier extends StateNotifier<int> {
@@ -32,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
       ),
-      home: const HomePage2(),
+      home: HomeSte(),
     );
   }
 }
@@ -75,16 +82,16 @@ class _HomePageState extends ConsumerState<HomePage> {
   }
 }
 
+Future<String> getString() async {
+  await Future.delayed(Duration(seconds: 5));
+  return "ok baby";
+}
+
 class HomePage2 extends ConsumerStatefulWidget {
   const HomePage2({super.key});
 
   @override
   ConsumerState createState() => _HomePage2State();
-}
-
-Future<String> getString() async {
-  await Future.delayed(Duration(seconds: 5));
-  return "ok baby";
 }
 
 class _HomePage2State extends ConsumerState<HomePage2> {
