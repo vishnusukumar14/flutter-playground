@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-import '../model/todo.dart';
+import '../todo-app/todo.dart';
 
 class TodoState extends Equatable {
-  final List<Todos> todos;
+  final List<Todo> todos;
 
   const TodoState({this.todos = const []});
 
-  TodoState copyWith({List<Todos>? todos}) {
+  TodoState copyWith({List<Todo>? todos}) {
     return TodoState(todos: todos ?? this.todos);
   }
 

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../model/todo.dart';
+import '../todo-app/todo.dart';
 import 'todo_event.dart';
 import 'todo_state.dart';
 
@@ -12,16 +12,16 @@ class PlayAvatar {
   final String name;
   static final Map<String, PlayAvatar> _cache = {};
 
-  factory PlayAvatar.named(String name) {
-    return _cache.putIfAbsent(name, () => PlayAvatar._new(name));
+  factory PlayAvatar.create(String name) {
+    return _cache.putIfAbsent(name, () => PlayAvatar._create(name));
   }
 
-  PlayAvatar._new(this.name);
+  PlayAvatar._create(this.name);
 }
 
 void cs() {
-  final name1 = PlayAvatar.named("name");
-  final name2 = PlayAvatar.named("name2");
+  final name1 = PlayAvatar.create("name");
+  final name2 = PlayAvatar.create("name2");
 
   if (kDebugMode) {
     print(identical(name2, name1));
@@ -31,7 +31,7 @@ void cs() {
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
   TodoBloc() : super(TodoState()) {
     on<AddTodo>((event, emit) {
-      final List<Todos> updated = List.from(state.todos)..add(event.todo);
+      final List<Todo> updated = List.from(state.todos)..add(event.todo);
       emit(state.copyWith(todos: updated));
     });
 
@@ -43,14 +43,14 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
     on<ToggleTodo>((event, emit) {
       final updated = state.todos.map((todo) {
         return todo.id == event.id
-            ? todo.copyWith(isEnabled: !todo.isEnabled)
+            ? todo.copyWith(isCompleted: !todo.isCompleted)
             : todo;
       }).toList();
       emit(state.copyWith(todos: updated));
     });
   }
 }
-vo
+
 class HomeSte extends StatelessWidget {
   const HomeSte({super.key});
 
@@ -61,7 +61,8 @@ class HomeSte extends StatelessWidget {
         onPressed: () {
           context.read<TodoBloc>().add(
             AddTodo(
-              Todos.create(
+              Todo.create(
+                userId: 1,
                 title: "New todo - ${Random.secure().nextInt(1545)}",
               ),
             ),

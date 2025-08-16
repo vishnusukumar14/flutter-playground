@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
-import 'package:test_palyground/model/todo.dart';
+
+import '../todo-app/todo.dart';
 
 abstract class TodoEvent extends Equatable {}
 
 class AddTodo extends TodoEvent {
-  final Todos todo;
+  final Todo todo;
 
   AddTodo(this.todo);
 
@@ -13,7 +14,7 @@ class AddTodo extends TodoEvent {
 }
 
 class ToggleTodo extends TodoEvent {
-  final String id;
+  final int id;
 
   ToggleTodo(this.id);
 
@@ -22,7 +23,7 @@ class ToggleTodo extends TodoEvent {
 }
 
 class DeleteTodo extends TodoEvent {
-  final String id;
+  final int id;
 
   DeleteTodo(this.id);
 
